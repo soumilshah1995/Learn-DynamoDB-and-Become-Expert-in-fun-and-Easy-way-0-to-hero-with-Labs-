@@ -8,4 +8,5 @@
 # Slides 
 * https://docs.google.com/presentation/d/1DGq4x9QLBIEBNVkhM8rTfTP4UB_8xMl9/edit?rtpof=true&sd=true
 
+* Lab 6 for code refer https://github.com/soumilshah1995/multi-region-api-gateway-dynamodb
 

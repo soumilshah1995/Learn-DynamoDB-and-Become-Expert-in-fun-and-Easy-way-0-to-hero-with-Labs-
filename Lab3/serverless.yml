@@ -1,0 +1,56 @@
+service: learn-dynamodb-lab3
+
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  stackTags:
+    product: job-topic-model
+    env: qa
+    created-date: 2022-04-26
+    team: python-dev
+    customer-impact: false
+    terraform: false
+
+useDotenv: true
+
+
+resources:
+  Resources:
+    myTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${env:TABLE_NAME}
+        AttributeDefinitions:
+          - AttributeName: user_id
+            AttributeType: S
+          - AttributeName: product_id
+            AttributeType: S
+          - AttributeName: total_amount_spend
+            AttributeType: S
+        KeySchema:
+          - AttributeName: user_id
+            KeyType: HASH
+          - AttributeName: product_id
+            KeyType: RANGE
+        BillingMode: PAY_PER_REQUEST
+        TableClass: STANDARD
+        PointInTimeRecoverySpecification:
+          PointInTimeRecoveryEnabled: true
+        LocalSecondaryIndexes:
+          -
+            IndexName: "user_id-total_amount_spend-index"
+            KeySchema:
+              -
+                AttributeName: "user_id"
+                KeyType: HASH
+              -
+                AttributeName: "total_amount_spend"
+                KeyType: RANGE
+            Projection:
+              ProjectionType: ALL
+        Tags:
+          - Key: 'product'
+            Value: 'soumil'
+          - Key: 'customerImpact'
+            Value: 'false'
