@@ -36,7 +36,7 @@ resources:
         BillingMode: PAY_PER_REQUEST
         TableClass: STANDARD
         PointInTimeRecoverySpecification:
-          PointInTimeRecoveryEnabled: true
+          PointInTimeRecoveryEnabled: false
         LocalSecondaryIndexes:
           -
             IndexName: "user_id-total_amount_spend-index"

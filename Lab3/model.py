@@ -39,7 +39,6 @@ class ViewIndex(LocalSecondaryIndex):
     class Meta:
         index_name = "user_id-total_amount_spend-index"
         projection = AllProjection()
-
         aws_access_key_id = os.getenv("AWS_ACCESS_KEY")
         aws_secret_access_key = os.getenv("AWS_SECRET_KEY")
 
@@ -57,7 +56,10 @@ class UserModelLSI(Model):
         aws_secret_access_key = os.getenv("AWS_SECRET_KEY")
 
     user_id = UnicodeAttribute(hash_key=True)
-    total_amount_spend = UnicodeAttribute(range_key=True)
+    total_amount_spend  = UnicodeAttribute(range_key=True)
+    view_index = ViewIndex()
+
+
     product_id = UnicodeAttribute(null=True)
     product_name = UnicodeAttribute(null=True)
     product_desc = UnicodeAttribute(null=True)
@@ -84,7 +86,11 @@ def query_pk_sk():
 
 def query_lsi():
 
-    for user in UserModelLSI.query("1", UserModelLSI.total_amount_spend.between("1000", "6000")):
+    for user in UserModelLSI.view_index.query("1"):
+        print(user.to_json())
+    print("------------------------")
+
+    for user in UserModelLSI.view_index.query("1", UserModel.total_amount_spend > "2000"):
         print(user.to_json())
     print("------------------------")
 
