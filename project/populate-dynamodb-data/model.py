@@ -72,12 +72,12 @@ def clean_table():
 
 def main():
 
-    clean_table()
+    #clean_table()
 
-    total_users = 4
-    total_posts_range = 2
-    total_comments_on_posts = 2
-    total_likes_on_posts = 2
+    total_users = 5
+    total_posts_range = 3
+    total_comments_on_posts = 10
+    total_likes_on_posts = 8
 
     for user in range(1, total_users):
         user = generate_users()

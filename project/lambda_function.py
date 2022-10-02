@@ -116,10 +116,12 @@ def lambda_handler(event, context):
 
             """Publish to SQS """
             queue_helper = AWSSQS(
-                aws_access_key_id=os.getenv("AWS_ACCESS_KEY"),
-                aws_secret_access_key=os.getenv("AWS_SECRET_KEY"),
-                region_name="us-east-1",
+                aws_access_key_id=os.getenv("DEV_AWS_ACCESS_KEY"),
+                aws_secret_access_key=os.getenv("DEV_AWS_SECRET_KEY"),
+                region_name=os.getenv("DEV_AWS_REGION"),
             )
+
+
             data = json.dumps(_final_processed_json, default=str)
             queue = queue_helper.get_queue_by_name(queue_name=os.getenv("SQS_NAME"))
             queue.send_message(MessageBody=data)

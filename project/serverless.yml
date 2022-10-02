@@ -4,6 +4,9 @@ frameworkVersion: '3'
 
 provider:
   name: aws
+  memorySize: 700
+  timeout: 300
+  runtime: python3.7
   stackTags:
     product: job-topic-model
     env: qa
@@ -19,6 +22,7 @@ plugins:
   - serverless-python-requirements
 
 
+
 custom:
   pythonRequirements:
     layer:
@@ -28,18 +32,22 @@ custom:
         - python3.7
 
 
+package:
+  exclude:
+    - '**/*'
+  include:
+    - '*.py'
+
 
 functions:
   kinesispreprocessor:
     handler: lambda_function.lambda_handler
     environment:
-
-      AWS_ACCESS_KEY: ${env:AWS_ACCESS_KEY}
-      AWS_SECRET_KEY: ${env:AWS_SECRET_KEY}
-      AWS_REGION: ${env:AWS_REGION}
+      DEV_AWS_ACCESS_KEY: ${env:DEV_AWS_ACCESS_KEY}
+      DEV_AWS_SECRET_KEY: ${env:DEV_AWS_SECRET_KEY}
+      DEV_AWS_REGION: ${env:DEV_AWS_REGION}
       SQS_NAME: ${env:NAME_SOURCE_QUEUE}
       ENV: 'dev'
-
     events:
       - stream:
           type: kinesis
@@ -53,8 +61,9 @@ functions:
     timeout: 300 # seconds
     reservedConcurrency: 500
     environment:
-      AWS_ACCESS_KEY: ${env:AWS_ACCESS_KEY}
-      AWS_SECRET_KEY: ${env:AWS_SECRET_KEY}
+      DEV_AWS_ACCESS_KEY: ${env:DEV_AWS_ACCESS_KEY}
+      DEV_AWS_SECRET_KEY: ${env:DEV_AWS_SECRET_KEY}
+      DEV_AWS_REGION: ${env:DEV_AWS_REGION}
       TABLE_NAME_STATS: ${env:TABLE_NAME_STATS}
       SQS_NAME: ${env:NAME_SOURCE_QUEUE}
     layers:
