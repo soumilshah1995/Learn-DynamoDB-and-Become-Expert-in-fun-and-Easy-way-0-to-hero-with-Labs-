@@ -11,7 +11,7 @@ from pynamodb.attributes import *
 import uuid
 from dotenv import load_dotenv
 
-load_dotenv(".env")
+load_dotenv("../.env")
 
 
 class Linkedin(Model):
@@ -81,11 +81,13 @@ def main():
 
     for user in range(1, total_users):
         user = generate_users()
+
         response = Linkedin(
             pk=f"user#{user.get('user_id')}",
             sk=f"user#{user.get('user_id')}",
             user_object= user
         ).save()
+
         print(f"generating User : user#{user.get('user_id')}")
 
         for post in range(1, total_posts_range):
