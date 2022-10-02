@@ -30,20 +30,22 @@ class LinkedinStats(Model):
 def likes_stats_update_for_post(json_data):
 
     pk = json_data.get("pk")
-
     sk = json_data.get("sk")
-
     post_id = json_data.get("post_user_likes_gsi")
 
-    if "like_id#" in pk:
+
+    if "like#" in pk:
         found = False
 
-        for items in LinkedinStats.query(post_id):
-            if "like_id#" in pk:
+        for items in LinkedinStats.query(str(post_id)):
+            print("items", items.to_json())
+
+            if "post_id#" in items.pk:
                 found = True
                 break
 
         """This posts meta data is not there initialize to zero """
+
         if found == False:
             likes=  str(0)
             comment = str(0)
@@ -94,7 +96,6 @@ def comments_stats_update_for_post(json_data):
             comment = str(0)
             LinkedinStats(pk=post_id, sk=post_id,likes=likes, comment=comment).save()
 
-
         else:
             for items in LinkedinStats.query(post_id):
                 if json_data.get("eventName").lower() == "INSERT".lower():
@@ -116,7 +117,8 @@ def stats(event=None, context=None):
     for message in messages:
         json_data = json.loads(message.get("body"))
 
-        if "like_id#" in json_data.get("pk"):
+        if "like#" in json_data.get("pk"):
+            print(messages)
             print("inside like method ")
             likes_stats_update_for_post(json_data)
 
@@ -128,6 +130,8 @@ def stats(event=None, context=None):
         print("sqs message ", message)
 
     return "ok"
+
+
 
 """
 TEST PAYLAOD 

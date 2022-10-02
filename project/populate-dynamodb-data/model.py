@@ -72,14 +72,24 @@ def clean_table():
 
 def main():
 
-    #clean_table()
+    clean_table()
 
-    total_users = 5
-    total_posts_range = 3
-    total_comments_on_posts = 10
-    total_likes_on_posts = 8
+    total_users = 3
+    total_posts_range = 2
+    total_comments_on_posts = 80
+    total_likes_on_posts = 90
+    print(f"""
+    --------------------------------
+    This will Generate 
+    Total Users {total_users}
+    Total Posts  = {total_users * total_posts_range}
+    Total Comments  = {total_comments_on_posts}
+    otal Comments = {total_likes_on_posts}
+    --------------------------------
 
-    for user in range(1, total_users):
+    """)
+
+    for user in range(0, total_users):
         user = generate_users()
 
         response = Linkedin(
@@ -90,7 +100,7 @@ def main():
 
         print(f"generating User : user#{user.get('user_id')}")
 
-        for post in range(1, total_posts_range):
+        for post in range(0, total_posts_range):
 
             post = generate_posts()
 
@@ -108,7 +118,7 @@ def main():
 
     for post in posts:
 
-        for user in range(1, total_comments_on_posts):
+        for user in range(0, total_comments_on_posts):
 
             random_user = random.choice(users)
             comment = generate_comment()
@@ -124,7 +134,7 @@ def main():
                         ).save()
             print(f"generating comments {comment.get('comment_id')} on posts :{posts}")
 
-        for user in range(1, total_likes_on_posts):
+        for user in range(0, total_likes_on_posts):
             random_user = random.choice(users)
             like = generate_likes()
             response = Linkedin(
