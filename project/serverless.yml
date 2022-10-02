@@ -1,4 +1,4 @@
-service: learn-dynamodb-lab2
+service: dynamodb-aggreation-pipeline
 
 frameworkVersion: '3'
 
@@ -14,9 +14,52 @@ provider:
 
 useDotenv: true
 
+functions:
+  lambda:
+    handler: lambda_function.lambda_handler
+    environment:
+
+      DEV_AWS_ACCESS_KEY: ${env:AWS_ACCESS_KEY}
+      DEV_AWS_SECRET_KEY: ${env:AWS_SECRET_KEY}
+      DEV_AWS_REGION_NAME: ${env:DEV_AWS_REGION_NAME}
+      ENV: 'dev'
+
+    events:
+      - stream:
+          type: kinesis
+          arn:
+            Fn::GetAtt:
+              - KinesisDataStreams
+              - Arn
+
+  dynamodbstats:
+    handler: handler.stats
+    timeout: 300 # seconds
+    reservedConcurrency: 500
+    environment:
+      AWS_ACCESS_KEY: ${env:AWS_ACCESS_KEY}
+      AWS_SECRET_KEY: ${env:AWS_SECRET_KEY}
+      TABLE_NAME_STATS: ${env:TABLE_NAME_STATS}
+    events:
+      - sqs:
+          arn:
+            Fn::GetAtt:
+              - MyQueue
+              - Arn
+
 
 resources:
+
   Resources:
+
+    KinesisDataStreams:
+      Type: AWS::Kinesis::Stream
+      Properties:
+        Name: ${env:StreamName}
+        RetentionPeriodHours: ${env:RetentionPeriodHours}
+        StreamModeDetails:
+          StreamMode: ON_DEMAND
+
     myTable:
       Type: AWS::DynamoDB::Table
       Properties:
@@ -32,7 +75,8 @@ resources:
             AttributeType: S
           - AttributeName: post_user_likes_gsi
             AttributeType: S
-
+        KinesisStreamSpecification:
+          StreamArn: !GetAtt KinesisDataStreams.Arn
         KeySchema:
           - AttributeName: pk
             KeyType: HASH
@@ -61,3 +105,40 @@ resources:
               ProjectionType: ALL
         PointInTimeRecoverySpecification:
           PointInTimeRecoveryEnabled: false
+
+    statsdynamodb:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${env:TABLE_NAME_STATS}
+        AttributeDefinitions:
+          - AttributeName: pk
+            AttributeType: S
+          - AttributeName: sk
+            AttributeType: S
+
+        KeySchema:
+          - AttributeName: pk
+            KeyType: HASH
+          - AttributeName: sk
+            KeyType: RANGE
+        BillingMode: PAY_PER_REQUEST
+        TableClass: STANDARD
+        PointInTimeRecoverySpecification:
+          PointInTimeRecoveryEnabled: false
+
+    MyQueue:
+      Type: "AWS::SQS::Queue"
+      Properties:
+        QueueName: ${env:NAME_SOURCE_QUEUE}
+        VisibilityTimeout : 500
+        MessageRetentionPeriod: 1209600
+        MaximumMessageSize: 262144
+        ReceiveMessageWaitTimeSeconds: 2
+        RedrivePolicy:
+          deadLetterTargetArn: !GetAtt MyDeadLetterQueue.Arn
+          maxReceiveCount: 5
+
+    MyDeadLetterQueue:
+      Type: AWS::SQS::Queue
+      Properties:
+        QueueName: ${env:NAME_DLQ_QUEUE}
