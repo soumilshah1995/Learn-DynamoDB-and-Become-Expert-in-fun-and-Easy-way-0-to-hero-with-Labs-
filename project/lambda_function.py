@@ -11,6 +11,7 @@ try:
 except Exception as e:
     print("Error : {} ".format(e))
 
+
 def unmarshall(dynamo_obj: dict) -> dict:
     """Convert a DynamoDB dict into a standard dict."""
     deserializer = TypeDeserializer()
@@ -21,7 +22,6 @@ def marshall(python_obj: dict) -> dict:
     """Convert a standard dict into a DynamoDB ."""
     serializer = TypeSerializer()
     return {k: serializer.serialize(v) for k, v in python_obj.items()}
-
 
 
 class Datetime(object):
@@ -38,7 +38,7 @@ class Datetime(object):
         return year, month, day
 
 
-def flatten_dict(data, parent_key='', sep='_'):
+def flatten_dict(data, parent_key="", sep="_"):
     """Flatten data into a single dict"""
     try:
         items = []
@@ -53,16 +53,39 @@ def flatten_dict(data, parent_key='', sep='_'):
         return {}
 
 
+class AWSSQS(object):
+
+    """Helper class to which add functionality on top of boto3 """
+
+    def __init__(self, aws_access_key_id, aws_secret_access_key, region_name):
+        self.sqs_client = boto3.resource(
+            "sqs",
+            aws_access_key_id=aws_access_key_id,
+            aws_secret_access_key=aws_secret_access_key,
+            region_name=region_name,
+        )
+
+    def get_queue_by_name(self, queue_name=""):
+        try:
+            queue_name = self.sqs_client.get_queue_by_name(QueueName=queue_name)
+            return queue_name
+        except Exception as e:
+            raise Exception("Error : {}".format(e))
+
+    def __repr__(self):
+        return "AWS SQS Helper class "
+
+
 def lambda_handler(event, context):
 
     print("event", event)
     print("\n")
 
-    print("Length: {} ".format(len(event['Records'])))
+    print("Length: {} ".format(len(event["Records"])))
 
-    for record in event['Records']:
+    for record in event["Records"]:
 
-        payload = base64.b64decode(record['kinesis']['data'])
+        payload = base64.b64decode(record["kinesis"]["data"])
         de_serialize_payload = json.loads(payload)
 
         print("de_serialize_payload", de_serialize_payload, type(de_serialize_payload))
@@ -92,8 +115,14 @@ def lambda_handler(event, context):
             print("_final_processed_json", _final_processed_json)
 
             """Publish to SQS """
-
+            queue_helper = AWSSQS(
+                aws_access_key_id=os.getenv("AWS_ACCESS_KEY"),
+                aws_secret_access_key=os.getenv("AWS_SECRET_KEY"),
+                region_name="us-east-1",
+            )
+            data = json.dumps(_final_processed_json, default=str)
+            queue = queue_helper.get_queue_by_name(queue_name=os.getenv("SQS_NAME"))
+            queue.send_message(MessageBody=data)
 
     print("****************  ALL SET *********************")
-    print("Length: {} ".format(len(event['Records'])))
-
+    print("Length: {} ".format(len(event["Records"])))
