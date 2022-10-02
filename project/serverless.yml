@@ -14,6 +14,21 @@ provider:
 
 useDotenv: true
 
+plugins:
+  - serverless-dotenv-plugin
+  - serverless-python-requirements
+
+
+custom:
+  pythonRequirements:
+    layer:
+      name: python-pynamodb
+      description: "Layer which contains PynamoDB"
+      compatibleRuntimes:
+        - python3.7
+
+
+
 functions:
   lambda:
     handler: lambda_function.lambda_handler
@@ -40,6 +55,8 @@ functions:
       AWS_ACCESS_KEY: ${env:AWS_ACCESS_KEY}
       AWS_SECRET_KEY: ${env:AWS_SECRET_KEY}
       TABLE_NAME_STATS: ${env:TABLE_NAME_STATS}
+    layers:
+      - Ref: PythonRequirementsLambdaLayer
     events:
       - sqs:
           arn:
