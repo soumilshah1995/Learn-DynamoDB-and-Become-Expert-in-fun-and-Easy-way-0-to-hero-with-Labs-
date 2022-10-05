@@ -1,0 +1,63 @@
+
+useDotenv: true
+
+service: labs-${env:LAB_NUMBER}-team-${env:TEAM_NUMBER}
+
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  stackTags:
+    labs: ${env:LAB_NUMBER}
+    env: qa
+    created-date: 2022-04-26
+    team: python-dev
+    customer-impact: false
+    terraform: false
+    teams : ${env:TEAM_NUMBER}
+
+
+resources:
+  Resources:
+    dynamodbtables:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${env:TABLE_NAME}-lab-${env:LAB_NUMBER}-team-${env:TEAM_NUMBER}
+        AttributeDefinitions:
+          - AttributeName: pk
+            AttributeType: S
+          - AttributeName: sk
+            AttributeType: S
+          - AttributeName: gs1pk
+            AttributeType: S
+          - AttributeName: gs2pk
+            AttributeType: S
+        KeySchema:
+          - AttributeName: pk
+            KeyType: HASH
+          - AttributeName: sk
+            KeyType: RANGE
+        BillingMode: PAY_PER_REQUEST
+        TableClass: STANDARD
+        PointInTimeRecoverySpecification:
+          PointInTimeRecoveryEnabled: false
+        GlobalSecondaryIndexes:
+          - IndexName: "gs1pk-index"
+            KeySchema:
+              -
+                AttributeName: "gs1pk"
+                KeyType: "HASH"
+            Projection:
+              ProjectionType: ALL
+          - IndexName: "gs2pk-index"
+            KeySchema:
+              -
+                AttributeName: "gs2pk"
+                KeyType: "HASH"
+            Projection:
+              ProjectionType: ALL
+        Tags:
+          - Key: 'labs'
+            Value: ${env:LAB_NUMBER}
+          - Key: 'team'
+            Value: ${env:TEAM_NUMBER}
