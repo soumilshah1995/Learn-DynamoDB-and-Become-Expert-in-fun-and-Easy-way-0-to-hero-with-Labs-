@@ -27,10 +27,12 @@ class AuthorsBooks(Model):
     isbn = UnicodeAttribute(null=True)
     total_pages = UnicodeAttribute(null=True)
     book_price = UnicodeAttribute(null=True)
+    books_meta_data = MapAttribute(null=True)
+
 
     gs1pk = UnicodeAttribute(null=True)
     category = UnicodeAttribute(null=True)
 
     gs2pk = UnicodeAttribute(null=True)
-    ttl = UnicodeAttribute(null=True)
+    ttl = NumberAttribute(null=True)
 
