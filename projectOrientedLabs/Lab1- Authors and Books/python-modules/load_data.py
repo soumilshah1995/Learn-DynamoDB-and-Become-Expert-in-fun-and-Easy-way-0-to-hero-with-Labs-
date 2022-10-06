@@ -1,4 +1,3 @@
-
 try:
     from faker import Faker
     import uuid
@@ -11,44 +10,15 @@ try:
     from data import BOOKS_DATA
 except Exception as e:pass
 
-
-def generate_authors(item):
-    faker = Faker()
-
-    for author in item.get("authors"):
-
-        _ = {}
-        _['author_id'] = uuid.uuid4().__str__()
-        _["author_name"] = item.get("")
-
-    return _
-
-
-def generate_books(alias_name='book_'):
-
-    faker = Faker()
-    _= {}
-    _['{}id'.format(alias_name)] = uuid.uuid4().__str__()
-    book =  random.choice(books_dataset.get("books"))
-    _["book_title"] =book.get("title")
-    _['book_published_data'] = book.get("published").__str__()
-    _['book_price'] = random.randint(30, 200).__str__()
-    _['isbn'] = book.get("isbn").__str__()
-    _['total_pages'] = book.get("pages").__str__()
-
-    return _
-
 def clean_table():
     for x in AuthorsBooks.scan():
         x.delete()
-
 
 def get_current_timestamp():
     # current date and time
     ttl_time = datetime.now() + relativedelta(years=2)
     timestamp = datetime.timestamp(datetime.now() + relativedelta(years=1))
     return round(timestamp)
-
 
 def load_data_sets():
     clean_table()
