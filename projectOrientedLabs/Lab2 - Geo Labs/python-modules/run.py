@@ -13,12 +13,10 @@ try:
 except Exception as e:
     pass
 
-
 def unmarshall(dynamo_obj: dict) -> dict:
     """Convert a DynamoDB dict into a standard dict."""
     deserializer = TypeDeserializer()
     return {k: deserializer.deserialize(v) for k, v in dynamo_obj.items()}
-
 
 def marshall(python_obj: dict) -> dict:
     """Convert a standard dict into a DynamoDB ."""
@@ -94,6 +92,10 @@ class DynamoDBGeoPy(object):
             )
         )
         return [unmarshall(item) for item in query_reduis_result]
+
+    def update_items(self):
+        pass
+
 
 def load_data(helper):
 

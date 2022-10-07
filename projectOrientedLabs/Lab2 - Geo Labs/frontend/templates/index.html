@@ -35,6 +35,17 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+    <!-- Google API -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=XXXXXXXX&libraries=places&callback=whereAutocomplete" async defer></script>
+
+
 </head>
 <body>
 
@@ -56,7 +67,11 @@
     section {
         margin-bottom: 20px;
     }
-
+    #map {
+        height: 500px !important;
+        margin: auto;
+        background: gray;
+    }
 
 
 </style>
@@ -76,37 +91,43 @@
     </div>
 </nav>
 
-<div class="jumbotron" style="height: 100vh;">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <h3 style="margin-top: 5px;" class="text-center">
-                    Location Search Powered By DynamoDB
-                </h3>
+<div class="" style="height: 100vh;">
+    <div>
+        <div class="jumbotron container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h3 style="margin-top: 5px;" class="text-center">
+                        Location Search Powered By DynamoDB
+                    </h3>
+                </div>
+            </div>
+            <br/>
+            <div class="row">
+                <div class="col-md-6">
+                    <h3 style="margin-top: 5px;"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" aria-hidden="true"><defs></defs><path fill="#767676" fill-rule="evenodd" d="M5.81104 8.2c0-2.322 1.87303-4.2 4.18889-4.2 2.31587 0 4.18887 1.878 4.18887 4.2 0 2.581-2.8123 6.1691-3.8282 7.3811-.1906.2274-.5307.2274-.72131 0C8.62332 14.3691 5.81104 10.781 5.81104 8.2zm4.1889 2.0029c1.10456 0 1.99996-.89545 1.99996-2.00002 0-1.10457-.8954-2-1.99996-2-1.10457 0-2 .89543-2 2s.89543 2.00002 2 2.00002z" clip-rule="evenodd"></path></svg> where</h3>
+                    <fieldset style="width: 100%;">
+                        <input id="where" class="form-control" type="text" placeholder="City, State, or Zip" autocomplete="off" style="width: 100%;" />
+                    </fieldset>
+                </div>
+                <div class="col-md-3">
+                    <h3 style="margin-top: 5px;">
+                        Radius
+                    </h3>
+                    <fieldset style="width: 100%;">
+                        <input id="radius" class="form-control" type="text" placeholder="Enter Radius to Filter Search in Meter" autocomplete="off" style="width: 100%;" />
+                    </fieldset>
+                </div>
+                <div class="col-md-3">
+                    <a onclick="fn_search()" style="margin-top: 40px;" id="search"  href="javascript:void(0)" class="btn btn-primary btn-lg">Search</a>
+                </div>
             </div>
         </div>
         <br/>
-        <div class="row">
-            <div class="col-md-6">
-                <h3 style="margin-top: 5px;"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" aria-hidden="true"><defs></defs><path fill="#767676" fill-rule="evenodd" d="M5.81104 8.2c0-2.322 1.87303-4.2 4.18889-4.2 2.31587 0 4.18887 1.878 4.18887 4.2 0 2.581-2.8123 6.1691-3.8282 7.3811-.1906.2274-.5307.2274-.72131 0C8.62332 14.3691 5.81104 10.781 5.81104 8.2zm4.1889 2.0029c1.10456 0 1.99996-.89545 1.99996-2.00002 0-1.10457-.8954-2-1.99996-2-1.10457 0-2 .89543-2 2s.89543 2.00002 2 2.00002z" clip-rule="evenodd"></path></svg> where</h3>
-                <fieldset style="width: 100%;">
-                    <input id="where" class="form-control" type="text" placeholder="City, State, or Zip" autocomplete="off" style="width: 100%;" />
-                </fieldset>
-            </div>
-            <div class="col-md-3">
-                <h3 style="margin-top: 5px;">
-                    Radius
-                </h3>
-                <fieldset style="width: 100%;">
-                    <input id="radius" class="form-control" type="text" placeholder="Enter Radius to Filter Search in Meter" autocomplete="off" style="width: 100%;" />
-                </fieldset>
-            </div>
-            <div class="col-md-3">
-                <a onclick="fn_search()" style="margin-top: 40px;" id="search"  href="javascript:void(0)" class="btn btn-primary btn-lg">Search</a>
-            </div>
+        <div class="container">
+            <div id="map"></div>
+            <br/>
+            <div id="main-content-placeholder"></div>
         </div>
-        <br/>
-        <div id="main-content-placeholder"></div>
     </div>
 </div>
 
@@ -119,7 +140,7 @@
                 <th scope="col">Address</th>
                 <th scope="col">City</th>
                 <th scope="col">county</th>
-                <th scope="col">dataobject</th>
+                <th scope="col">hashKey</th>
 
             </tr>
             </thead>
@@ -129,7 +150,7 @@
                             <th scope="row">{{this.address}}</th>
                             <th scope="row">{{this.city}}</th>
                             <th scope="row">{{this.county}}</th>
-                            <th scope="row">{{this.dataobject}}</th>
+                            <th scope="row">{{this.hashKey}}</th>
 
 
                         </tr>
@@ -141,16 +162,45 @@
     </script>
 {% endraw %}
 
-<!-- Google API -->
-<!--PUT YOUR GOOGLE KEY XXXXXXX-->
-<script src="https://maps.googleapis.com/maps/api/js?key=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX&libraries=places&callback=whereAutocomplete" async defer></script>
+
 <script>
 
 
     var loc = null;
     var lat = null;
     var lon = null;
+    var map;
+    var coordinates = []
+    var markers = []
+    var circle;
+    var user_location_lat;
+    var user_location_lon;
+    var center_payload ;
 
+    var Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000
+    });
+
+    $(document).ready(function() {
+        getLocation()
+    });
+
+    $("#map").hide()
+
+
+    function showMarker(index) {
+        hideAllMarkers();
+        markers[index - 1].setMap(map);
+    }
+
+    function hideAllMarkers() {
+        for(var i = 0; i < markers.length; i++) {
+            markers[i].setMap(null);
+        }
+    }
 
     function fn_search(){
 
@@ -160,29 +210,92 @@
             "lon":lon,
             radius:$("#radius").val().trim()
         }
-        console.log(payload)
+        make_api_call(payload, lat, lon , false);
+    }
 
+    function make_api_call(payload, lat, lon, first_search=true){
         $.ajax({
             url: "/pipe",
             type : 'POST',
             cache: false,
             data:{'data': JSON.stringify(payload)},
-            success: function(response)
-            {
-                console.log("response")
-                console.log(response)
-                console.log(typeof (response))
+            success: function(response) {
+                if (response.data != []){
 
-                console.log("response.data")
-                console.log(response.data)
-                console.log(typeof (response.data))
+                    const removeDuplicates = (arr) => [...new Set(arr)]
+                    response.data = removeDuplicates(response.data)
+
+                    coordinates = []
+
+                    for(var i = 0; i < response.data.length; i++) {
+                        let lat = parseFloat(response.data[i].geoJson.split(",")[0])
+                        let lon = parseFloat(response.data[i].geoJson.split(",")[1])
+                        let item = {lat: lat, lng: lon}
+                        coordinates.push(item)
+                    }
+
+                    for(var i = 0; i < coordinates.length; i++) {
+                        var marker = new google.maps.Marker({
+                            position: coordinates[i],
+                            map: map,
+                            title: "Stores",
+                        });
+                        markers.push(marker);
+                    }
+
+                    $("#map").show()
 
 
-                templateScript = Handlebars.compile($('#table-template').html());
-                $("#main-content-placeholder").html(templateScript(response));
+                    if (first_search) center_payload =  {lat: lat, lng: lon}
+                    else center_payload =  coordinates[0]
+
+                    map.setOptions({
+                        center: center_payload,
+                        zoom: 10,
+                        radius: 50*1609.34,
+                        fillColor: '#AA0000'
+                    });
+
+                    circle.bindTo('center', marker, 'position');
+
+                    templateScript = Handlebars.compile($('#table-template').html());
+                    $("#main-content-placeholder").html(templateScript(response));
+
+                }
+                else{
+                    coordinates = []
+                    toastr.error('No Result Found') // error, info, warning
+                    $("#map").hide()
+                }
+            },
+            error : function (response){
+                coordinates = []
+                toastr.error('No Result Found') // error, info, warning
+                $("#map").hide()
             }
         });
+    }
 
+    function showPosition(position) {
+        user_location_lat =  position.coords.latitude;
+        user_location_lon = position.coords.longitude;
+        let payload = {
+
+            "lat": position.coords.latitude,
+            "lon":position.coords.longitude,
+            radius:10000
+        }
+        coordinates = []
+        make_api_call(payload, position.coords.latitude, position.coords.longitude , true);
+
+    }
+
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+        } else {
+            x.innerHTML = "Geolocation is not supported by this browser.";
+        }
     }
 
 
@@ -196,23 +309,32 @@
         radius = null;
     });
 
-
     function place_changed() {
         lat = autocomplete.getPlace().geometry.location.lat();
         lon = autocomplete.getPlace().geometry.location.lng();
         loc = autocomplete.getPlace().formatted_address;
     }
 
-
     function whereAutocomplete() {
-        autocomplete = new google.maps.places.Autocomplete(
-            document.getElementById('where'),
-            {
+
+        autocomplete = new google.maps.places.Autocomplete(document.getElementById('where'), {
                 types: ['(regions)'],
-                componentRestrictions: { 'country': ['US', 'CA'] }
-            }
-        );
+                componentRestrictions: { 'country': ['US'] }
+            });
+
         autocomplete.addListener('place_changed', place_changed);
+
+        map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 10,
+        });
+
+        circle = new google.maps.Circle({
+            map: map,
+            radius:16093,    // 10 miles in metres
+            fillColor: '#AA0000'
+        });
+
+
     }
 
     Handlebars.registerHelper('if_cond', function (v1, operator, v2, options) {
