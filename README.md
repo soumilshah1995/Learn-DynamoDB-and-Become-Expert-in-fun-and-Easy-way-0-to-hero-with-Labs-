@@ -8,10 +8,16 @@
 
 #### Slides https://docs.google.com/presentation/d/1DGq4x9QLBIEBNVkhM8rTfTP4UB_8xMl9/edit?rtpof=true&sd=true
 
+------------------------------------------------------
+## project 1
+![Capture](https://user-images.githubusercontent.com/39345855/194558557-5a05041a-8ab7-4b30-aeb8-af6b96ac650c.PNG)
 
+* Search Dynamodb Data and perform location-based searches using city, state, zip code, latitude, and longitude | GeoHash | Flask 
+
+* Code: https://lnkd.in/eTu4B6Sj
 
 ------------------------------------------------------
-## project 
+## project 2
 
 ![Untitled Diagram](https://user-images.githubusercontent.com/39345855/193470095-e60e8ee2-3c3e-4dae-b626-b78b52d14103.jpg)
 
