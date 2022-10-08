@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--Bootstrap CSS-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+
+    <!--Bootstrap JS-->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="https://apis.google.com/js/platform.js"></script>
+
+
+    <!-- Boot Strap css Links -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+
+
+
+    <!-- JQuery links  -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <!-- Handel Barjs -->
+    <script src="https://twitter.github.io/typeahead.js/js/handlebars.js"></script>
+
+    <!-- Font ASUM-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+
+    <!-- CSS only -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+    <!-- JS, Popper.js, and jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+
+</head>
+<body>
+
+<style>
+    html, body, div, span, applet, object, iframe,
+    h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+    a, abbr, acronym, address, big, cite, code,
+    del, dfn, em, img, ins, kbd, q, s, samp,
+    small, strike, strong, sub, sup, tt, var,
+    b, u, i, center,
+    dl, dt, dd, ol, ul, li,
+    fieldset, form, label, legend,
+    table, caption, tbody, tfoot, thead, tr, th, td,
+    article, aside, canvas, details, embed,
+    figure, figcaption, footer, header, hgroup,
+    menu, nav, output, ruby, section, summary,
+    time, mark, audio, video {
+        margin: 0;
+        padding: 0;
+        border: 0;
+        font-size: 100%;
+        font: inherit;
+        vertical-align: baseline;
+    }
+    /* HTML5 display-role reset for older browsers */
+    article, aside, details, figcaption, figure,
+    footer, header, hgroup, menu, nav, section {
+        display: block;
+    }
+    body {
+        line-height: 1;
+    }
+    ol, ul {
+        list-style: none;
+    }
+    blockquote, q {
+        quotes: none;
+    }
+    blockquote:before, blockquote:after,
+    q:before, q:after {
+        content: '';
+        content: none;
+    }
+    table {
+        border-collapse: collapse;
+        border-spacing: 0;
+    }
+
+    /* ---------------------------------------------------------- Main css -------------------------------------------------------------*/
+    body{
+        font-family: 'Roboto', sans-serif;
+        min-height: 100vh;
+    }
+    /* ------------------------------------------------- for mobiles -------------------------------------------------------------------- */
+    @media(max-width: 900px){
+        /* ---------------------------------- NAV BAR ---------------------------- */
+        .nav-bar{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .nav1{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .icon-about{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 0.5em;
+            padding: 1em;
+        }
+        .nav1 a{
+            margin-top: 0.5em;
+            padding: 1em;
+            border-bottom: 1px solid #adb5bd;
+            color: #adb5bd;
+            font-size: 1em;
+            text-decoration: none;
+            transform: translateY(103px);
+        }
+        .nav1 input{
+            margin-top: 0.5em;
+            border: none;
+            border-bottom: 1px solid #adb5bd;
+            padding: 0.8em 1em;
+            font-size: 1em;
+        }
+        .nav1 input::placeholder{
+            font-family: 'Roboto', sans-serif;
+            color: #adb5bd;
+            font-size: 1em;
+        }
+        input:focus, textarea:focus, select:focus{
+            outline: none;
+        }
+        .nav-bar h3{
+            margin-top: 0.5em;
+            /* border-bottom: 1px solid #adb5bd; */
+            padding: 0.8em 1em;
+            font-size: 1em;
+            font-weight: bold;
+            transform: translateY(-103px);
+        }
+        .material-icons-outlined{
+            color: #adb5bd;
+            size: 2px;
+            margin-right: 1em;
+
+        }
+        .icon-about a{
+            text-decoration: none;
+            color: #adb5bd;
+            font-size: 1em;
+            padding-left: 1em;
+        }
+
+        /* ------------------------- main book store ---------------------------- */
+        main{
+            margin-top: 1em;
+            font-family: 'Noto Sans JP', sans-serif;
+        }
+        .books{
+            display: flex;
+            flex-direction: row;
+            background-color: #cbb5e2;
+            border-radius: 10px;
+            margin-bottom: 3em;
+            box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
+        }
+        .books:nth-of-type(2){
+            background-color: #fbadaf;
+        }
+        .books:nth-of-type(3){
+            background-color: #a4e0eb;
+        }
+        .books:nth-of-type(4){
+            background-color: #fdca95;
+        }
+        .book-img{
+            width: 100%;
+            max-width: 1000px;
+            margin: 1.5em;
+            border-radius: 3px;
+            transition: transform 1s;
+            box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+        }
+        .book-img:hover{
+            transform: scale(1.05);
+        }
+        .descp{
+            margin: 1.5em;
+            padding: 1em;
+
+        }
+        .book-name{
+            font-weight: bold;
+            padding-bottom: 0.5em;
+            font-size: 1.1em;
+            letter-spacing: 1px;
+            color: white;
+        }
+        .author{
+            padding-bottom: 0.5em;
+            font-size: 1.1em;
+            letter-spacing: 1px;
+            color: white;
+        }
+        .rating{
+            padding-bottom: 1.2em;
+            font-size: 1em;
+            letter-spacing: 1px;
+            color: white;
+        }
+        .info{
+            font-size: 1em;
+            letter-spacing: 1px;
+            color: white;
+        }
+        .descp button{
+            margin-top: 1em;
+            background: none;
+            border: none;
+            color: #cbb5e2;
+            background-color: white;
+            padding: 0.6em 1.5em;
+            font-size: 1em;
+            border-radius: 20px;
+            font-weight: bolder;
+        }
+        .descp button:hover{
+            color: #a790f2;
+        }
+        #b1{
+            color: #fbadaf;
+        }
+        #b1:hover{
+            color: #ff6e9f;
+        }
+        #b2{
+            color: #a4e0eb;
+        }
+        #b2:hover{
+            color: #62cdec;
+        }
+        #b3{
+            color: #fdca95;
+        }
+        #b3:hover{
+            color: #fb9124;
+        }
+
+    }
+
+
+
+
+
+
+    /*--------------------------------------------------------------- fOR PC AND LAPTOPS -------------------------------------------- */
+    @media(min-width: 900px){
+        /* ----------------------------------------------------- Navbar ---------------------------------------------------------- */
+        .nav-bar{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+        .nav1{
+            display: flex;
+            flex-direction: row;
+            margin-left: 1em;
+            margin-bottom: 1em;
+            margin-top: 1em;
+        }
+        .nav1 a{
+            padding: 1em;
+            border: none;
+            border-right: 1px solid #adb5bd;
+            color: #adb5bd;
+            font-size: 1em;
+            text-decoration: none;
+        }
+        .nav1 input{
+            border: none;
+            margin-left: 0.5em;
+            padding: 0.8em 1em;
+            font-size: 1em;
+        }
+        .nav1 input::placeholder{
+            font-family: 'Roboto', sans-serif;
+            color: #adb5bd;
+            font-size: 1em;
+        }
+        input:focus, textarea:focus, select:focus{
+            outline: none;
+        }
+        .nav-bar h3{
+            padding: 0.8em 1em;
+            margin-left: 1em;
+            margin-bottom: 1em;
+            margin-top: 1em;
+            font-size: 1em;
+            font-weight: bold;
+        }
+        .icon-about{
+            display: flex;
+            align-items: center;
+        }
+        .material-icons-outlined{
+            color: #adb5bd;
+            size: 2px;
+            margin-right: 1em;
+
+        }
+        .icon-about a{
+            margin-right: 2em;
+            text-decoration: none;
+            color: #adb5bd;
+            font-size: 1em;
+            border-left: 1px solid #adb5bd;
+            padding-left: 1em;
+        }
+
+        /* ------------------- MAIN BOOKS ---------------------------------- */
+        main{
+            margin-top: 1em;
+            font-family: 'Noto Sans JP', sans-serif;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: space-evenly;
+            align-items: center;
+        }
+        .books{
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+            max-width: 600px;
+            justify-content: space-evenly;
+            background-color: #cbb5e2;
+            border-radius: 10px;
+            margin-bottom: 3em;
+            box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
+        }
+        .books:nth-of-type(2){
+            background-color: #fbadaf;
+        }
+        .books:nth-of-type(3){
+            background-color: #a4e0eb;
+        }
+        .books:nth-of-type(4){
+            background-color: #fdca95;
+        }
+        .book-img{
+            width: 100%;
+            max-width: 500px;
+            border-radius: 3px;
+            transition: transform 1s;
+            margin: 1.5em;
+            box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+        }
+        .book-img:hover{
+            transform: scale(1.05);
+        }
+        .descp{
+            margin: 1.5em;
+            padding: 1em;
+
+        }
+        .book-name{
+            font-weight: bold;
+            padding-bottom: 0.5em;
+            font-size: 1.1em;
+            letter-spacing: 1px;
+            color: white;
+        }
+        .author{
+            padding-bottom: 0.5em;
+            font-size: 1.1em;
+            letter-spacing: 1px;
+            color: white;
+        }
+        .rating{
+            padding-bottom: 1.2em;
+            font-size: 1em;
+            letter-spacing: 1px;
+            color: white;
+        }
+        .info{
+            font-size: 1em;
+            letter-spacing: 1px;
+            color: white;
+        }
+        .descp button{
+            margin-top: 1em;
+            background: none;
+            border: none;
+            color: #cbb5e2;
+            background-color: white;
+            padding: 0.6em 1.5em;
+            font-size: 1em;
+            border-radius: 20px;
+            font-weight: bolder;
+        }
+        .descp button:hover{
+            color: #a790f2;
+        }
+        #b1{
+            color: #fbadaf;
+        }
+        #b1:hover{
+            color: #ff6e9f;
+        }
+        #b2{
+            color: #a4e0eb;
+        }
+        #b2:hover{
+            color: #62cdec;
+        }
+        #b3{
+            color: #fdca95;
+        }
+        #b3:hover{
+            color: #fb9124;
+        }
+
+
+
+
+    }
+
+</style>
+
+<nav class="nav-bar">
+    <div class="nav1">
+        <a href="">Browse Categories</a>
+        <input type="text" id="search_book" placeholder="Search Books By Categories">
+        <a onclick="fn_search()"  href="javascript:void(0)"  style="color: wheat; border-radius: 100px; background: darkorchid" class="btn btn-small">Go</a>
+    </div>
+    <h3>Book Store</h3>
+</nav>
+
+<div>
+    <div style="text-align: center;">
+        <h1 style="font-size: 30px; color:darkgreen;">Powered by DynamoDB Single Table Design </h1>
+        <br/>
+        <p>FrontEnd Code Credits <a href="https://codepen.io/yashfalke77/pen/eYvwgGW">Link</a></p>
+    </div>
+
+    <div id="render-template"></div>
+
+
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div id="modal-template"></div>
+        </div>
+    </div>
+
+
+</div>
+
+
+{%raw%}
+    <script id="template-books" type="text/x-handlebars-template">
+        <main>
+            {{#each data}}
+                <div onclick="btn_book_click('{{this.pk}}');" class="books">
+                    <div>
+                        <img src="{{this.books_meta_data.thumbnailUrl}}" alt="" class="book-img">
+                    </div>
+                    <div class="descp">
+                        <h2 class="book-name">{{this.book_title}}</h2>
+                        <h3 class="author">{{this.author_data_object.AuthorName}}</h3>
+                        <h3 class="rating">category: <span class="badge badge-success">{{this.category}}</span> </h3>
+                        <button type="submit">See the Book</button>
+                    </div>
+                </div>
+            {{/each}}
+
+        </main>
+    </script>
+
+    <script id="template-books-modal" type="text/x-handlebars-template">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Books </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                {{#each data}}
+                    <div class="books">
+                        <div>
+                            <img src="{{this.books_meta_data.thumbnailUrl}}" alt="" class="book-img">
+                        </div>
+                        <div class="descp">
+                            <h2 class="book-name">{{this.book_title}}</h2>
+                            <h3 class="author">{{this.author_data_object.AuthorName}}</h3>
+                            <h3 class="rating">category: <span class="badge badge-success">{{this.category}}</span> </h3>
+                            <p
+                        </div>
+                    </div>
+                {{/each}}
+
+                <br/>
+                <br/>
+            </div>
+
+            <br/>
+            {{#each data}}<p style="padding-top: 20px;">{{this.books_meta_data.longDescription}}</p>{{/each}}
+
+            <br/>
+            {{#each data}}<p>ISBN <span class="badge badge-danger"> {{this.isbn}}</span></p>{{/each}}
+
+            <br/>
+            {{#each data}}<p>Date <span class="badge badge-info"> {{this.book_published_data}}</span></p>{{/each}}
+
+            <br/>
+            {{#each data}}<p>Date <span class="badge badge-success"> {{this.book_price}}</span></p>{{/each}}
+
+
+            <br/>
+            {{#each data}}<p>Date <span class="badge badge-dark"> {{this.book_price}}</span></p>{{/each}}
+
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+            </div>
+        </div>
+    </script>
+{%endraw%}
+
+<script type="text/javascript">
+
+    function myFunc(vars) {
+        return vars
+    }
+
+    var book_data = myFunc({{book_data| tojson }})
+
+    console.log(book_data)
+
+    $.each( book_data.data, function( index, value ){
+        book_data.data[index] = JSON.parse(value);
+
+    });
+
+
+</script>
+
+<script>
+
+
+    var Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000
+    });
+    var books_api_call;
+
+
+    function myFunc(vars) {
+        return vars
+    }
+
+    function btn_book_click(pk){
+
+        let payload = {
+            "book":pk
+        }
+        console.log(payload);
+
+        // templateScript = Handlebars.compile($('#template-books-modal').html());
+        // $("#modal-template").html(templateScript(books_api_call));
+        //
+        // $('#exampleModalCenter').modal("show");
+
+        $.ajax({
+            url: "/get_book",
+            type : 'POST',
+            cache: false,
+            data:{'data': JSON.stringify(payload)},
+            success: function(response) {
+                console.log("hahah")
+                console.log(response)
+
+                $.each( response.data, function( index, value ){
+                    response.data[index] = JSON.parse(value);
+                });
+
+
+                templateScript = Handlebars.compile($('#template-books-modal').html());
+                $("#modal-template").html(templateScript(response));
+                $('#exampleModalCenter').modal("show");
+
+
+            },
+            error : function (response){
+                toastr.error('No Result Found') // error, info, warning
+
+            }
+        });
+
+
+
+    }
+
+
+    $(document).ready(function() {
+        var book_data = {{ book_data | tojson }}
+        $.each( book_data.data, function( index, value ){
+            book_data.data[index] = JSON.parse(value);
+        });
+
+        templateScript = Handlebars.compile($('#template-books').html());
+        $("#render-template").html(templateScript(book_data));
+
+    });
+
+    function fn_search(){
+
+        let payload = {
+            "category":$("#search_book").val().trim()
+        }
+        make_api_call(payload);
+    }
+
+    function make_api_call(payload, first_search=true){
+        toastr.success("You are Now Querying  GSI ") // error, info, warning
+        $.ajax({
+            url: "/get_books_categories",
+            type : 'POST',
+            cache: false,
+            data:{'data': JSON.stringify(payload)},
+            success: function(response) {
+
+                books_api_call = response;
+
+                console.log("data apis call books_api_call ")
+                console.log(books_api_call, typeof (books_api_call))
+
+                $.each( books_api_call.data, function( index, value ){
+                    books_api_call.data[index] = JSON.parse(value);
+
+                });
+
+                templateScript = Handlebars.compile($('#template-books').html());
+                $("#render-template").html(templateScript(books_api_call));
+
+
+            },
+            error : function (response){
+                coordinates = []
+                toastr.error('No Result Found') // error, info, warning
+
+            }
+        });
+    }
+
+    Handlebars.registerHelper('if_cond', function (v1, operator, v2, options) {
+        switch (operator) {
+            case '==':
+                return (v1 == v2) ? options.fn(this) : options.inverse(this);
+            case '===':
+                return (v1 === v2) ? options.fn(this) : options.inverse(this);
+            case '!=':
+                return (v1 != v2) ? options.fn(this) : options.inverse(this);
+            case '!==':
+                return (v1 !== v2) ? options.fn(this) : options.inverse(this);
+            case '<':
+                return (v1 < v2) ? options.fn(this) : options.inverse(this);
+            case '<=':
+                return (v1 <= v2) ? options.fn(this) : options.inverse(this);
+            case '>':
+                return (v1 > v2) ? options.fn(this) : options.inverse(this);
+            case '>=':
+                return (v1 >= v2) ? options.fn(this) : options.inverse(this);
+            case '&&':
+                return (v1 && v2) ? options.fn(this) : options.inverse(this);
+            case '||':
+                return (v1 || v2) ? options.fn(this) : options.inverse(this);
+            default:
+                return options.inverse(this);
+        }
+    });
+
+</script>
+</body>
+</html>

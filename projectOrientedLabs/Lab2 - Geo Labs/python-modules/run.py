@@ -140,5 +140,3 @@ def main():
     helper.create_dynamodb_table()
     load_data(helper)
 
-
-main()

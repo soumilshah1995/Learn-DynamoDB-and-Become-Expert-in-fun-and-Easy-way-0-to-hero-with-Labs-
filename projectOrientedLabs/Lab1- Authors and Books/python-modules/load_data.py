@@ -26,25 +26,24 @@ def load_data_sets():
         try:
             print(c)
             for author in items.get("authors"):
+
                 author_id = uuid.uuid4().__str__()
+
                 AuthorsBooks(
                     pk=f"Author#{author_id}",
                     sk=f"Author#{author_id}",
                     author_data_object={
                         "AuthorName":author
-
                     },
                     ttl=get_current_timestamp()
-
                 ).save()
 
                 book_id = uuid.uuid4().__str__()
 
                 if items.get("categories") == []:
-
                     res = AuthorsBooks(
                         pk=f"Book#{book_id}",
-                        sk=f"Book#{book_id}#{author_id}",
+                        sk=f"Book#{book_id}#Author#{author_id}",
                         book_title=items.get("title"),
                         book_published_data=items.get("publishedDate", {}).get("$date"),
                         book_price = random.randint(20,300).__str__(),
@@ -61,15 +60,16 @@ def load_data_sets():
                             "status":items.get("status"),
                         },
                         category="",
-                        gs1pk=author_id,
-                        gs2pk = "",
+                        gs1pk=f"Author#{author_id}",
+                        gs2pk="",
                         ttl=get_current_timestamp()
                     ).save()
+
                 else:
                     for category in items.get("categories"):
                         res = AuthorsBooks(
                             pk=f"Book#{book_id}",
-                            sk=f"Book#{book_id}#{author_id}#Category#{category}",
+                            sk=f"Book#{book_id}Author#{author_id}#Category#{category}",
                             book_title=items.get("title"),
                             book_published_data=items.get("publishedDate", {}).get("$date"),
                             book_price = random.randint(20,300).__str__(),
@@ -86,7 +86,7 @@ def load_data_sets():
                                 "status":items.get("status"),
                             },
                             category=category,
-                            gs1pk=author_id,
+                            gs1pk=f"Author#{author_id}",
                             gs2pk = category,
                             ttl=get_current_timestamp()
                         ).save()

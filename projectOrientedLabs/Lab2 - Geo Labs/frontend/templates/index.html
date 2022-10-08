@@ -43,7 +43,7 @@
 
 
     <!-- Google API -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=XXXXXXXX&libraries=places&callback=whereAutocomplete" async defer></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=XXXXXXXXXXXXXXX&libraries=places&callback=whereAutocomplete" async defer></script>
 
 
 </head>
@@ -185,7 +185,7 @@
     });
 
     $(document).ready(function() {
-        getLocation()
+        // getLocation()
     });
 
     $("#map").hide()
@@ -221,6 +221,8 @@
             data:{'data': JSON.stringify(payload)},
             success: function(response) {
                 if (response.data != []){
+
+                    console.log(response)
 
                     const removeDuplicates = (arr) => [...new Set(arr)]
                     response.data = removeDuplicates(response.data)
