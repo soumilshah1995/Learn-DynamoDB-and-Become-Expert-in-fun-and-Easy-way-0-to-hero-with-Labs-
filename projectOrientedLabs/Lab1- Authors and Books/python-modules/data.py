@@ -2081,44 +2081,6 @@ BOOKS_DATA = [
         "categories": ["Microsoft .NET"]
     },
     {
-        "title": "SQL Server MVP Deep Dives",
-        "isbn": "9781935182047",
-        "pageCount": 848,
-        "publishedDate": { "$date": "2009-11-15T00:00:00.000-0800" },
-        "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/nielsenaw.jpg",
-        "shortDescription": "SQL Server MVP Deep Dives is organized into five parts: Design and Architecture, Development, Administration, Performance Tuning and Optimization, and Business Intelligence. In each, you'll find concise, brilliantly clear chapters that take on key topics like mobile data strategies, Dynamic Management Views, or query performance.",
-        "longDescription": "This is no ordinary SQL Server book. In SQL Server MVP Deep Dives, the world's leading experts and practitioners offer a masterful collection of techniques and best practices for SQL Server development and administration. 53 MVPs each pick an area of passionate interest to them and then share their insights and practical know-how with you.    SQL Server MVP Deep Dives is organized into five parts: Design and Architecture, Development, Administration, Performance Tuning and Optimization, and Business Intelligence. In each, you'll find concise, brilliantly clear chapters that take on key topics like mobile data strategies, Dynamic Management Views, or query performance.",
-        "status": "PUBLISH",
-        "authors": [
-            "Contributions from 53 SQL Server MVPs; Edited by Paul Nielsen",
-            "Kalen Delaney",
-            "Greg Low",
-            "Adam Machanic",
-            "Paul S. Randal",
-            "",
-            "Kimberly L. Tripp"
-        ],
-        "categories": ["Microsoft .NET"]
-    },
-    {
-        "title": "SQL Server MVP Deep Dives",
-        "isbn": "9781935182047",
-        "pageCount": 848,
-        "publishedDate": { "$date": "2009-11-01T00:00:00.000-0700" },
-        "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/nielsonaw.jpg",
-        "status": "PUBLISH",
-        "authors": [
-            "Paul Nielsen",
-            "Kalen Delaney",
-            "Greg Low",
-            "Adam Machanic",
-            "Paul S. Randal",
-            "",
-            "Kimberly L. Tripp"
-        ],
-        "categories": ["Microsoft .NET"]
-    },
-    {
         "title": "PostGIS in Action",
         "isbn": "1935182269",
         "pageCount": 325,

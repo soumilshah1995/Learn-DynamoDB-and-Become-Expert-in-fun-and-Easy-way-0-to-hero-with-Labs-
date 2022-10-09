@@ -6,9 +6,91 @@ try:
     import random
     from dateutil.relativedelta import relativedelta
     from datetime import datetime
-    from helper import AuthorsBooks
+
+    from pynamodb.indexes import GlobalSecondaryIndex, AllProjection
+    from pynamodb.models import Model
+    from pynamodb.attributes import *
+    from dotenv import load_dotenv
+    import os
+
+
+    load_dotenv("../.env")
     from data import BOOKS_DATA
+
 except Exception as e:pass
+
+
+global TABLE_NAME
+TABLE_NAME = f'{os.getenv("TABLE_NAME")}-lab-{os.getenv("LAB_NUMBER")}-team-{os.getenv("TEAM_NUMBER")}'
+
+
+class AuthorsBooks(Model):
+    class Meta:
+        table_name = TABLE_NAME
+        aws_access_key_id = os.getenv("AWS_ACCESS_KEY")
+        aws_secret_access_key = os.getenv("AWS_SECRET_KEY")
+
+    pk = UnicodeAttribute(hash_key=True)
+    sk = UnicodeAttribute(range_key=True)
+    author_data_object = MapAttribute(null=True)
+
+    book_title = UnicodeAttribute(null=True)
+    book_published_data = UnicodeAttribute(null=True)
+    isbn = UnicodeAttribute(null=True)
+    total_pages = UnicodeAttribute(null=True)
+    book_price = UnicodeAttribute(null=True)
+    books_meta_data = MapAttribute(null=True)
+
+    gs1pk = UnicodeAttribute(null=True)
+    category = UnicodeAttribute(null=True)
+
+    gs2pk = UnicodeAttribute(null=True)
+    ttl = NumberAttribute(null=True)
+
+
+class ViewIndex(GlobalSecondaryIndex):
+
+    """
+    This class represents a global secondary index
+    """
+
+    class Meta:
+        index_name = "gs2pk-index"
+        projection = AllProjection()
+        aws_access_key_id = os.getenv("AWS_ACCESS_KEY")
+        aws_secret_access_key = os.getenv("AWS_SECRET_KEY")
+
+    gs2pk = UnicodeAttribute(hash_key=True)
+
+
+class CategoriesModel(Model):
+    """
+    A test model that uses a global secondary index
+    """
+
+    class Meta:
+        aws_access_key_id = os.getenv("AWS_ACCESS_KEY")
+        aws_secret_access_key = os.getenv("AWS_SECRET_KEY")
+        table_name = TABLE_NAME
+
+    pk = UnicodeAttribute(null=True)
+    sk = UnicodeAttribute(null=True)
+    author_data_object = MapAttribute(null=True)
+
+    book_title = UnicodeAttribute(null=True)
+    book_published_data = UnicodeAttribute(null=True)
+    isbn = UnicodeAttribute(null=True)
+    total_pages = UnicodeAttribute(null=True)
+    book_price = UnicodeAttribute(null=True)
+    books_meta_data = MapAttribute(null=True)
+
+    gs1pk = UnicodeAttribute(null=True)
+    category = UnicodeAttribute(null=True)
+    ttl = NumberAttribute(null=True)
+
+    view_index = ViewIndex()
+    gs2pk = UnicodeAttribute(hash_key=True)
+
 
 def clean_table():
     for x in AuthorsBooks.scan():
@@ -19,6 +101,7 @@ def get_current_timestamp():
     ttl_time = datetime.now() + relativedelta(years=2)
     timestamp = datetime.timestamp(datetime.now() + relativedelta(years=1))
     return round(timestamp)
+
 
 def load_data_sets():
     clean_table()
@@ -93,5 +176,22 @@ def load_data_sets():
         except Exception as e:
             pass
 
+
+def  get_categories():
+
+    for cat in CategoriesModel.view_index.scan():
+
+        try:
+            AuthorsBooks(
+                pk=f"categoryList#",
+                sk=str(cat.category)
+            ).save()
+        except Exception as e:
+            pass
+
+
+
+
 if __name__ == '__main__':
     load_data_sets()
+    get_categories()
