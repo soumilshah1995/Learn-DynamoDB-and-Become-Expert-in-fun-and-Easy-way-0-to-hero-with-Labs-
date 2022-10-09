@@ -11,7 +11,7 @@
 ------------------------------------------------------
 ## Project 1: DynamoDB SIngle table Desgin 
 
-![Capture](https://user-images.githubusercontent.com/39345855/194724598-9145b3af-8ac1-4751-8d71-9e92a76709cb.PNG)
+![Capture](https://user-images.githubusercontent.com/39345855/194767309-4708d00d-d57e-4630-ba0a-13a0b7d7ee34.PNG)
 
 ------------------------------------------------------
 
