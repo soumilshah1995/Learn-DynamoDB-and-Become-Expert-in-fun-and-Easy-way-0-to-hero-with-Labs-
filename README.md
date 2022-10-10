@@ -8,6 +8,10 @@
 
 #### Slides https://docs.google.com/presentation/d/1DGq4x9QLBIEBNVkhM8rTfTP4UB_8xMl9/edit?rtpof=true&sd=true
 
+#### Amazing way to Learn DynamoDB 
+![image](https://user-images.githubusercontent.com/39345855/194881299-c74ffd8d-dcf4-4954-b000-e2af79d43a73.png)
+
+
 ------------------------------------------------------
 ## Project 1: DynamoDB SIngle table Desgin 
 
