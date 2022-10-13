@@ -10,10 +10,15 @@ try:
 
     from boto3.dynamodb.types import TypeDeserializer, TypeSerializer
     from dotenv import load_dotenv
-    from helper import (get_sample_books,
-                        get_books_categories_from_dynamo_db,
-                        get_book_from_dynamodb,
-                        get_categories_auto_complete)
+
+    from helper import (
+        get_sample_books,
+        get_books_categories_from_dynamo_db,
+        get_book_from_dynamodb,
+        get_categories_auto_complete,
+        update_book_dynamodb,
+        delete_book_dynamodb,
+    )
 
     load_dotenv("../.env")
 
@@ -21,6 +26,7 @@ except Exception as e:
     print("Error", e)
 
 app = Flask(__name__)
+
 
 @app.route("/", methods=["GET", "POST"])
 def home():
@@ -48,7 +54,24 @@ def get_book():
 @app.route("/get_all_category", methods=["GET", "POST"])
 def get_all_category():
     data = get_categories_auto_complete()
-    return {"data":data}
+    return {"data": data}
+
+
+@app.route("/update_book", methods=["GET", "POST"])
+def update_book():
+    data = json.loads(dict(request.form).get("data"))
+    book = data.get("book")
+    desc = data.get("desc")
+    update_book_dynamodb(book=book, desc=desc)
+    return {"data": "True"}
+
+
+@app.route("/delete_book", methods=["GET", "POST"])
+def delete_book():
+    data = json.loads(dict(request.form).get("data"))
+    book = data.get("book")
+    delete_book_dynamodb(book=book)
+    return {"data": "True"}
 
 
 if __name__ == "__main__":

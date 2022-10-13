@@ -10,12 +10,16 @@ try:
     from boto3.dynamodb.types import TypeDeserializer, TypeSerializer
     from flask import request
     from dotenv import load_dotenv
-    load_dotenv(".env")
+    load_dotenv("../.env")
 except Exception  as e:
     pass
 
 
 app = Flask(__name__)
+
+global TABLE_NAME
+TABLE_NAME = f'{os.getenv("TABLE_NAME")}-lab-{os.getenv("LAB_NUMBER")}-team-{os.getenv("TEAM_NUMBER")}'
+
 
 
 def unmarshall(dynamo_obj: dict) -> dict:
@@ -112,7 +116,7 @@ def pipe():
         aws_access_key_id=os.getenv("AWS_ACCESS_KEY"),
         aws_secret_access_key=os.getenv("AWS_SECRET_KEY"),
         region_name=os.getenv("REGION"),
-        table_name=os.getenv("TABLE"),
+        table_name=TABLE_NAME,
         hash_key_length=3,
     )
 
