@@ -8,6 +8,11 @@
 
 #### Slides https://docs.google.com/presentation/d/1DGq4x9QLBIEBNVkhM8rTfTP4UB_8xMl9/edit?rtpof=true&sd=true
 
+##### DynamoDB Mind Map: https://miro.com/app/board/uXjVPNFcnV8=/?share_link_id=882231590532
+![image](https://user-images.githubusercontent.com/39345855/199483883-7d32c488-8f7a-4c0d-9c12-5fd957e5d523.png)
+
+
+
 #### Amazing way to Learn DynamoDB 
 ![image](https://user-images.githubusercontent.com/39345855/194881299-c74ffd8d-dcf4-4954-b000-e2af79d43a73.png)
 
